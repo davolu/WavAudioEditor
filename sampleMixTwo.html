@@ -1,0 +1,62 @@
+ <html>
+ <head>
+ <title>Mix two wav files</title>
+ <script src='waveEditor.js'> </script>
+ 
+ </head>
+ <body>
+ This is a simple usage of the mix method for mixing just two wav files. <br/><br/>
+ 
+ File 1: <input id='file1' type='file'/><br/>
+  File 2: <input id='file2' type='file'/><br/>
+   <button onclick='mixFiles()'>mix</button>
+ <script>
+ 
+ var buffer1,buffer2
+ 
+
+ 
+var fileInput1 = document.getElementById('file1');
+fileInput1.addEventListener('change', function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+       
+		buffer1 = reader.result;
+     	
+    };
+    reader.readAsArrayBuffer(this.files[0]);
+}, false);
+ 
+ 
+
+ var fileInput2 = document.getElementById('file2');
+fileInput2.addEventListener('change', function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+       
+		buffer2 = reader.result;
+     	
+    };
+    reader.readAsArrayBuffer(this.files[0]);
+}, false);
+
+
+ 
+ 
+ function mixFiles()
+ {
+    var appender = new WaveEditor();
+	appender.mix([buffer1,buffer2],'download','Mixed2Wav');
+ 
+ }
+ 
+ //This method gives a clearer mix but can only mix two wav files. For unlimited mix, try the
+ //mixBuffers() method.
+ //You can play instead of download. i.e. 
+ //appender.appendBuffers([buffer1,buffer2,buffer3],'play');
+ 
+ //Or return as blob  appender.mix([buffer1,buffer2],'blob');
+ </script>
+ 
+ </body>
+ </html>

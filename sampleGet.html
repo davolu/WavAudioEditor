@@ -1,0 +1,66 @@
+ <html>
+ <head>
+ <title>GET wav file infos</title>
+ <script src='waveEditor.js'> </script>
+ 
+ </head>
+ <body>
+ A simple example show how to read header...
+ <br/>
+ <input type='file'/>
+ 
+ <script>
+ 
+ 
+var fileInput = document.querySelector('input[type="file"]');
+fileInput.addEventListener('change', function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+         buffer = reader.result;
+         
+		 
+		 
+      var w = new WaveEditor();
+	   document.write(w.getChunkID(buffer) +'<br>');
+	   
+	   document.write(w.getChunkSize(buffer) +'<br>');
+	   
+	   document.write(w.getFormat(buffer) +'<br>');
+	   
+	   document.write(w.getChunkID2(buffer) +'<br>');
+	   
+	   document.write(w.getChunkSize2(buffer) +'<br>');
+	   
+	   document.write(w.getAudioFormat(buffer) +'<br>');
+	   
+	   document.write(w.getNumChannels(buffer) +'<br>');
+	   
+	   document.write(w.getSampleRate(buffer) +'<br>');
+	   
+	   document.write(w.getByteRate(buffer) +'<br>');
+	   
+	   document.write(w.getBlockAlign(buffer) +'<br>');
+		
+	   document.write(w.getBitsPerSample(buffer) +'<br>');
+	   
+	   document.write(w.getChunkID3(buffer) +'<br>');
+	   
+	   document.write(w.getChunkSize3(buffer) +'<br>');
+
+	   
+	   document.write(w.getDuration(buffer) +'<br>');
+		 
+		 
+		 
+    };
+    reader.readAsArrayBuffer(this.files[0]);
+}, false);
+ 
+ 
+
+ 
+ 
+ </script>
+ 
+ </body>
+ </html>

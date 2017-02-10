@@ -1,0 +1,74 @@
+ <html>
+ <head>
+ <title>Join wav files</title>
+ <script src='waveEditor.js'> </script>
+ 
+ </head>
+ <body>
+ This is a simple usage of the appendBuffers method. <br/><br/>
+ 
+ File 1: <input id='file1' type='file'/><br/>
+  File 2: <input id='file2' type='file'/><br/>
+   File 3: <input id='file3' type='file'/><br/><br/>
+   <button onclick='append()'>join</button>
+ <script>
+ 
+ var buffer1,buffer2,buffer3;
+ 
+
+ 
+var fileInput1 = document.getElementById('file1');
+fileInput1.addEventListener('change', function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+       
+		buffer1 = reader.result;
+     	
+    };
+    reader.readAsArrayBuffer(this.files[0]);
+}, false);
+ 
+ 
+
+ var fileInput2 = document.getElementById('file2');
+fileInput2.addEventListener('change', function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+       
+		buffer2 = reader.result;
+     	
+    };
+    reader.readAsArrayBuffer(this.files[0]);
+}, false);
+
+
+
+var fileInput3 = document.getElementById('file3');
+fileInput3.addEventListener('change', function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+       
+		buffer3 = reader.result;
+     	
+    };
+    reader.readAsArrayBuffer(this.files[0]);
+}, false);
+ 
+ 
+ 
+ function append()
+ {
+    var appender = new WaveEditor();
+	appender.appendBuffers([buffer1,buffer2,buffer3],'download','AppendedWav');
+ 
+ }
+ 
+ //This method can take more than 3 buffers. I just used 3 for example....
+ //You can play instead of download. i.e. 
+ //appender.appendBuffers([buffer1,buffer2,buffer3],'play');
+ 
+ //Or return as blob  appender.appendBuffers([buffer1,buffer2,buffer3],'blob');
+ </script>
+ 
+ </body>
+ </html>

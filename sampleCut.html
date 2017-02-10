@@ -1,0 +1,44 @@
+ <html>
+ <head>
+ <title>CUT wav file</title>
+ <script src='waveEditor.js'> </script>
+ 
+ </head>
+ <body>
+ A simple example show how cut a wav file...
+ <br/>
+ <input type='file'/>
+ 
+ <script>
+ 
+ 
+var fileInput = document.querySelector('input[type="file"]');
+fileInput.addEventListener('change', function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+         buffer = reader.result;
+         
+		 
+		 
+      var cut = new WaveEditor();
+	     cut.cutBuffer(buffer,2,'download','cuts');
+		 
+		 //This cuts the wav file into half. The second parameter represents the cut factor..
+		 //The cut can also be played or return as a blob
+		 
+ // cuts.cutBuffer(buffer,2,'play');
+ //Or return as blob  cuts.cutBuffer(buffer,2,'blob');
+		 
+		 
+    };
+    reader.readAsArrayBuffer(this.files[0]);
+}, false);
+ 
+ 
+
+ 
+ 
+ </script>
+ 
+ </body>
+ </html>
